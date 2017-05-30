@@ -14,6 +14,8 @@ class Home extends Component {
     constructor () {
         super();
 
+        this.symbols = ['!', '@','£','$','%','^','&','*','/'];
+
 	    this.handleChange = this.handleChange.bind(this);
 	    this.handleEncryption = this.handleEncryption.bind(this);
 	    this.copyPasswordToClipboard = this.copyPasswordToClipboard.bind(this);
@@ -33,10 +35,23 @@ class Home extends Component {
         let password = CryptoJS.PBKDF2(
             this.props.message,
             this.props.encryptionKey,
-            {keySize: 128 / 64}
+            {keySize: 128 / 32}
         ).toString();
 
-        this.props.dispatch(updatePassword(password));
+        let search = password.search(/\d/);
+
+        console.log(search);
+
+        password = `${password}${this.symbols[search]}`.split('');
+
+        let nth = 2;
+        for (let i = nth-1; i < password.length-1; i+=nth) {
+            password[i] = password[i].toUpperCase();
+        }
+
+
+
+        this.props.dispatch(updatePassword(password.join("")));
     }
 
     copyPasswordToClipboard = () => {

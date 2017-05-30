@@ -8,7 +8,7 @@ import {
     Link
 } from 'react-router-dom';
 
-import './App.css';
+import './assets/scss/App.css';
 
 import Home from './pages/home/home';
 

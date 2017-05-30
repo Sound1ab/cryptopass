@@ -1,4 +1,4 @@
-import {UPDATE_MESSAGE, UPDATE_KEY, UPDATE_PASSWORD} from '../actions/inputaction';
+import {UPDATE_MESSAGE, UPDATE_KEY} from '../actions/inputaction';
 
 export function input(state = {
     message: '',
@@ -13,10 +13,6 @@ export function input(state = {
         case UPDATE_KEY:
             return Object.assign({}, state, {
                 encryptionKey: action.encryptionKey
-            });
-        case UPDATE_PASSWORD:
-            return Object.assign({}, state, {
-                password: action.password
             });
         default:
             return state

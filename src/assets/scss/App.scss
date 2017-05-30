@@ -1,0 +1,195 @@
+@font-face {
+  font-family: "Cutepunk";
+  src: url(../fonts/Sophia.otf) format("truetype");
+}
+
+$tablet: "(min-width: 768px)";
+//$tablet: "(min-width: 768px) and (max-width: 1023px)";
+//$desktop: "(min-width: 1024px)";
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+html,
+body {
+  height: 100%;
+  width: 100%;
+  left: 0;
+  top: 0;
+  //overflow: hidden;
+  position: fixed;
+  line-height: 1;
+  background: rgba(232,191,255,1);
+  background: linear-gradient(to top, rgb(232, 191, 255) 0%, rgba(170,177,207,1) 100%);
+}
+#root {
+  height:100%;
+}
+ol, ul {
+  list-style: none;
+}
+blockquote, q {
+  quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+.page-container {
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 20px;
+  margin-bottom: 20px;
+
+  .menu {
+    margin-right: 25px;
+  }
+}
+
+.title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  width: 100%;
+
+  h1 {
+    font-family: 'Cutepunk', Verdana, Tahoma;
+    font-size: 26vw;
+    background: white;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    @media #{$tablet} {
+      font-size: 206px;
+    }
+  }
+}
+
+.inputs {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+
+    form {
+      display: flex;
+      flex-wrap: wrap;
+
+      .input-holder {
+        flex-grow: 1;
+        display: flex;
+        justify-content: center;
+        width: 100%;
+
+        input {
+          border: none;
+          -webkit-appearance:none;
+          outline: none;
+          height: 50px;
+          width: 66.9vw;
+          max-width: 350px;
+          margin: 20px 0;
+          padding: 0 20px;
+        }
+
+        button {
+          position: relative;
+          padding: 10px 20px;
+          background-color: white;
+          border: none;
+          margin: 20px 10px 10px 10px;
+          width: 90px;
+          pointer-events: all;
+
+          &:hover {
+            background: rgba(210,255,82,1);
+            background: linear-gradient(to right, rgb(110, 100, 222) 0%, rgb(130, 138, 255) 100%);
+          }
+        }
+      }
+  }
+}
+
+.password {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 185px;
+  pointer-events: none;
+
+  span {
+    position: relative;
+
+    h2 {
+      pointer-events: all;
+      font: 15px system-ui;
+    }
+
+    svg {
+      position: absolute;
+      top: 0;
+      right: -30px;
+    }
+  }
+
+  .buttons {
+
+    button {
+      position: relative;
+      padding: 10px 20px;
+      background-color: white;
+      border: none;
+      margin: 20px 10px 10px 10px;
+      width: 90px;
+      pointer-events: all;
+
+      &:hover {
+        background: rgba(210,255,82,1);
+        background: linear-gradient(to right, rgb(110, 100, 222) 0%, rgb(130, 138, 255) 100%);
+      }
+    }
+  }
+}

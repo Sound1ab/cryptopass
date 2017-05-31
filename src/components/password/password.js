@@ -1,5 +1,6 @@
 import React from 'react';
 import CopyToClipboard from 'react-copy-to-clipboard';
+import { CSSTransitionGroup } from 'react-transition-group'
 
 import styles from '../../assets/scss/App.scss';
 
@@ -21,20 +22,24 @@ const Password = ({password, copyPasswordToClipboardCallback, revealPasswordCall
 	}
 	return (
 		<div>
-			{this.hiddenPassword ?
-				<div className="password">
-					<span>
-						<h2>{this.hiddenPassword}</h2>{copyPassword ? tick : null}
-					</span>
-					<div className="buttons">
-						<CopyToClipboard text={password}
-						                 onCopy={copyPasswordToClipboardCallback}>
-							<button>Copy</button>
-						</CopyToClipboard>
-						<button onClick={revealPasswordCallback}>Reveal</button>
-					</div>
+			<div className="password">
+				<span>
+					<h2>{this.hiddenPassword}</h2>
+					<CSSTransitionGroup
+						transitionName="example"
+						transitionEnterTimeout={1000}
+						transitionLeaveTimeout={1000}>
+					{copyPassword ? tick : null}
+					</CSSTransitionGroup>
+				</span>
+				<div className="buttons">
+					<CopyToClipboard text={password}
+					                 onCopy={copyPasswordToClipboardCallback}>
+						<button>Copy</button>
+					</CopyToClipboard>
+					<button onClick={revealPasswordCallback}>Reveal</button>
 				</div>
-				: null}
+			</div>
 		</div>
 	);
 };

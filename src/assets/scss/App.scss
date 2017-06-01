@@ -3,6 +3,11 @@
   src: url(../fonts/Sophia.otf) format("truetype");
 }
 
+@font-face {
+  font-family: "Happy";
+  src: url(../fonts/Happy-Camper-Regular.ttf) format("truetype");
+}
+
 $tablet: "(min-width: 768px)";
 $height-tablet: "(max-height: 768px)";
 $height-mini: "(max-height: 567px)";
@@ -193,6 +198,43 @@ table {
         background: rgba(210,255,82,1);
         background: linear-gradient(to right, rgb(110, 100, 222) 0%, rgb(130, 138, 255) 100%);
       }
+    }
+  }
+}
+
+.popout-menu {
+  position: absolute;
+  width: 300px;
+  height: 100%;
+  top: 0%;
+  background-color: lightpink;
+  right: 0;
+  z-index: 1;
+  border-left: solid 1px white;
+  box-shadow: 10px 0px 59px 0px;
+
+  .cross {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+
+    svg {
+      margin-right: 20px;
+      margin-top: 20px
+    }
+  }
+
+  .menu-list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 100px;
+
+    li {
+      padding: 20px 0;
+      font-family: 'Happy', Verdana, Tahoma;
+      font-size: 50px;
+      color: white;
     }
   }
 }

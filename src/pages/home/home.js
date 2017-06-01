@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import CryptoJS from 'crypto-js';
 
 import Header from '../../components/header/header';
+import PopoutMenu from '../../components/header/menu';
 import Title from '../../components/title/title';
 import Inputs from '../../components/inputs/inputs';
 import Password from '../../components/password/password';
@@ -67,7 +68,6 @@ class Home extends Component {
 
 	render() {
 		let content = [
-			<Header dispatch={this.props.dispatch}/>,
 			<Title/>,
 			<Inputs handleChange={this.handleChange} handleEncryption={this.handleEncryption}/>,
 		]
@@ -81,6 +81,8 @@ class Home extends Component {
 		/>]
 		return (
 			<div className="page-container">
+				<Header dispatch={this.props.dispatch}/>
+				<PopoutMenu menuState={this.props.menuState} dispatch={this.props.dispatch}/>
 				<StaggeredMount content={content}>
 				</StaggeredMount>
 				{this.props.password ? <StaggeredMount content={password}>
@@ -97,6 +99,7 @@ const mapStateToProps = (state) => {
 		password: state.password.password,
 		copyPassword: state.password.copyPassword,
 		revealPassword: state.password.revealPassword,
+		menuState: state.menu.menuState,
 	}
 }
 

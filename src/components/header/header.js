@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
 
+import {toggleMenu} from '../../reduxconfig/actions/menuaction';
+
 import '../../assets/scss/App.css';
 
 import { svg } from '../../assets/svg/inlinesvgs';
@@ -12,10 +14,15 @@ const menu = svg({
 });
 
 export default class Header extends Component {
+
+    handleClick = () => {
+        this.props.dispatch(toggleMenu())
+    }
+
     render() {
         return (
             <div className="header">
-                <div className="menu">{menu}</div>
+                <div onClick={this.handleClick} className="menu">{menu}</div>
             </div>
         )
     }

@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import CryptoJS from 'crypto-js';
 
-import Header from '../../components/header/header';
-import PopoutMenu from '../../components/header/menu';
 import Title from '../../components/title/title';
 import Inputs from '../../components/inputs/inputs';
 import Password from '../../components/password/password';
@@ -70,7 +68,7 @@ class Home extends Component {
 		let content = [
 			<Title/>,
 			<Inputs handleChange={this.handleChange} handleEncryption={this.handleEncryption}/>,
-		]
+		];
 
 		let password = [<Password
 			password={this.props.password}
@@ -81,8 +79,6 @@ class Home extends Component {
 		/>]
 		return (
 			<div className="page-container">
-				<Header dispatch={this.props.dispatch}/>
-				<PopoutMenu menuState={this.props.menuState} dispatch={this.props.dispatch}/>
 				<StaggeredMount content={content}>
 				</StaggeredMount>
 				{this.props.password ? <StaggeredMount content={password}>

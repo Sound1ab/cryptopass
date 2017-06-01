@@ -7,8 +7,8 @@ class StaggeredMount extends React.Component {
 		super(props);
 
 		this.custom = {
-			stiffness: 20,
-			damping: 40
+			stiffness: 50,
+			damping: 7
 		}
 
 	}
@@ -51,7 +51,7 @@ class StaggeredMount extends React.Component {
 
 			return {
 				key: index,
-				style: {opacity: spring(destinationOpac), translateY: spring(destinationY)}
+				style: {opacity: spring(destinationOpac, this.custom), translateY: spring(destinationY, this.custom)}
 			}
 		});
 	}

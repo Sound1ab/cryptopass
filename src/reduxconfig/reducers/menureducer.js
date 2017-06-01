@@ -6,7 +6,7 @@ export const menu = function(state = {
 	switch (action.type) {
 		case TOGGLE_MENU:
 			return Object.assign({}, state, {
-				menuState: !state.menuState
+				menuState: action.value ? action.value : !state.menuState
 			});
 		default:
 			return state;

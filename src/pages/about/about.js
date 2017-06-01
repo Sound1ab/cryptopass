@@ -19,6 +19,7 @@ class About extends React.Component {
             <div className="page-container">
                 <StaggeredMount content={content}>
                 </StaggeredMount>
+	            <div>hey dudes</div>
             </div>
         );
     }

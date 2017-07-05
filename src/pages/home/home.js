@@ -14,7 +14,7 @@ class Home extends Component {
 	constructor() {
 		super();
 
-		this.symbols = ['!', '@', '£', '$', '%', '^', '&', '*', '/'];
+		this.symbols = ['!', '@', '>', '~', '%', '^', '&', '*', '/'];
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleEncryption = this.handleEncryption.bind(this);
@@ -35,7 +35,7 @@ class Home extends Component {
 		let password = CryptoJS.PBKDF2(
 			this.props.message,
 			this.props.encryptionKey,
-			{keySize: 128 / 64}
+			{keySize: 128 / 50}
 		).toString();
 
 		let search = password.search(/\d/);

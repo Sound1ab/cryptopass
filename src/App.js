@@ -11,7 +11,7 @@ class App extends Component {
 				<Header dispatch={this.props.dispatch}/>
 				<PopoutMenu menuState={this.props.menuState} dispatch={this.props.dispatch}/>
 				{this.props.children && React.cloneElement(this.props.children, {
-
+					test: 'test'
 				})}
 			</div>
 		);

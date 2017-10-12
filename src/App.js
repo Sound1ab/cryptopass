@@ -8,8 +8,6 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<Header dispatch={this.props.dispatch}/>
-				<PopoutMenu menuState={this.props.menuState} dispatch={this.props.dispatch}/>
 				{this.props.children && React.cloneElement(this.props.children, {
 					test: 'test'
 				})}

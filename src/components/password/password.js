@@ -24,7 +24,7 @@ const Password = ({password, copyPasswordToClipboardCallback, revealPasswordCall
 		<div>
 			<div className="password">
 				<span>
-					<h2>{this.hiddenPassword}</h2>
+					<h2 className="password__title">{this.hiddenPassword}</h2>
 					<CSSTransitionGroup
 						transitionName="example"
 						transitionEnterTimeout={1000}
@@ -33,8 +33,9 @@ const Password = ({password, copyPasswordToClipboardCallback, revealPasswordCall
 					</CSSTransitionGroup>
 				</span>
 				<div className="buttons">
-					<CopyToClipboard text={password}
-					                 onCopy={copyPasswordToClipboardCallback}>
+					<CopyToClipboard
+						text={password}
+						onCopy={copyPasswordToClipboardCallback}>
 						<button>Copy</button>
 					</CopyToClipboard>
 					<button onClick={revealPasswordCallback}>Reveal</button>

@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import CryptoJS from 'crypto-js';
+import { CSSTransitionGroup } from 'react-transition-group'
 
 import Title from '../../components/title/title';
 import Inputs from '../../components/inputs/inputs';
-import Password from '../../components/password/password';
-import StaggeredMount from '../../components/animation/staggeredmount';
+import Modal from '../../components/modal/modal'
 
 import {updateMessage, updateKey} from '../../reduxconfig/actions/inputaction';
 import {updatePassword, copyPassword, revealPassword} from '../../reduxconfig/actions/passwordaction';
@@ -37,27 +37,43 @@ class Home extends Component {
 			this.props.encryptionKey,
 			{keySize: 128 / 50}
 		).toString();
-
 		let search = password.search(/\d/);
-
-		console.log(search);
-
 		password = `${password}${this.symbols[search]}`.split('');
-
 		let nth = 2;
 		for (let i = nth - 1; i < password.length - 1; i += nth) {
 			password[i] = password[i].toUpperCase();
 		}
-
-
-		this.props.dispatch(updatePassword(password.join("")));
+		// this.props.dispatch(updatePassword(password.join("")));
+		this.copyPasswordToClipboard(password.join(""));
 	}
 
-	copyPasswordToClipboard = () => {
+	copyPasswordToClipboard = (password) => {
 		this.props.dispatch(copyPassword());
 		setTimeout(() => {
 			this.props.dispatch(copyPassword());
-		}, 500)
+		}, 1200)
+
+        let textArea = document.createElement("textarea");
+        textArea.style.position = 'fixed';
+        textArea.style.top = 0;
+        textArea.style.left = 0;
+        textArea.style.width = '2em';
+        textArea.style.height = '2em';
+        textArea.style.padding = 0;
+        textArea.style.border = 'none';
+        textArea.style.outline = 'none';
+        textArea.style.boxShadow = 'none';
+        textArea.style.background = 'transparent';
+        textArea.value = password;
+        document.body.appendChild(textArea);
+        textArea.select();
+
+        try {
+            document.execCommand('copy');
+        } catch (err) {
+            console.log('Oops, unable to copy');
+        }
+        document.body.removeChild(textArea);
 	}
 
 	revealPassword = () => {
@@ -65,24 +81,16 @@ class Home extends Component {
 	}
 
 	render() {
-		let content = [
-			<Title/>,
-			<Inputs handleChange={this.handleChange} handleEncryption={this.handleEncryption}/>,
-		];
-
-		let password = [<Password
-			password={this.props.password}
-			copyPasswordToClipboardCallback={this.copyPasswordToClipboard}
-			revealPasswordCallback={this.revealPassword}
-			copyPassword={this.props.copyPassword}
-			revealPassword={this.props.revealPassword}
-		/>]
 		return (
 			<div className="page-container">
-				<StaggeredMount content={content}>
-				</StaggeredMount>
-				{this.props.password ? <StaggeredMount content={password}>
-				</StaggeredMount> : null}
+				<CSSTransitionGroup
+					transitionName="glide-in"
+					transitionEnterTimeout={1000}
+					transitionLeaveTimeout={1000}>
+                	{this.props.copyPassword ? <Modal/> : null}
+				</CSSTransitionGroup>
+				<Title/>
+				<Inputs handleChange={this.handleChange} handleEncryption={this.handleEncryption}/>
 			</div>
 		)
 	}

@@ -11,7 +11,7 @@ const Inputs = ({ handleEncryption, handleChange }) => {
 	    <div className="inputs">
 		    <form onSubmit={handleEncryption}>
 			    <div className="input-holder">
-				    <input placeholder="passphrase" data-value="message" type="text"
+				    <input autoFocus autoCapitalize="none" placeholder="passphrase" data-value="message" type="text"
 				           onChange={handleChange}/>
 			    </div>
 			    <div className="input-holder">

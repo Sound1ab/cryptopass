@@ -9,7 +9,7 @@ const Title = ({  }) => {
     };
     return (
         <div className="title">
-	        <h1>Cryptopass</h1>
+	        <h1>Pretty Good Key</h1>
         </div>
     );
 };

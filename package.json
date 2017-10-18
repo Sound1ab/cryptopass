@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "clipboard": "^1.7.1",
     "crypto-js": "^3.1.9-1",
     "node-sass-chokidar": "0.0.2",
     "npm-run-all": "^4.0.2",

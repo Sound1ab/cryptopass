@@ -1,14 +1,14 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import CryptoJS from 'crypto-js';
-import { CSSTransitionGroup } from 'react-transition-group'
+import { CSSTransitionGroup } from 'react-transition-group';
+
 
 import Title from '../../components/title/title';
 import Inputs from '../../components/inputs/inputs';
 import Modal from '../../components/modal/modal'
 
-import {updateMessage, updateKey} from '../../reduxconfig/actions/inputaction';
-import {updatePassword, copyPassword, revealPassword} from '../../reduxconfig/actions/passwordaction';
+import {updatePassword, copyPassword} from '../../reduxconfig/actions/passwordaction';
 
 class Home extends Component {
 	constructor() {
@@ -18,23 +18,27 @@ class Home extends Component {
 
 		this.handleChange = this.handleChange.bind(this);
 		this.handleEncryption = this.handleEncryption.bind(this);
-		this.copyPasswordToClipboard = this.copyPasswordToClipboard.bind(this);
-		this.revealPassword = this.revealPassword.bind(this);
 	}
 
 	handleChange = (e) => {
-		if (e.target.getAttribute('data-value') === 'message') {
-			this.props.dispatch(updateMessage(e.target.value));
-		} else if (e.target.getAttribute('data-value') === 'encryptionKey') {
-			this.props.dispatch(updateKey(e.target.value));
+		if (!this.handleChange.message) {
+			this.handleChange.message = '';
 		}
+        if (!this.handleChange.key) {
+            this.handleChange.key = '';
+        }
+		if (e.target.getAttribute('data-value') === 'message') {
+			this.handleChange.message = e.target.value;
+		} else if (e.target.getAttribute('data-value') === 'encryptionKey') {
+            this.handleChange.key = e.target.value;
+		}
+		this.handleEncryption(this.handleChange.message, this.handleChange.key);
 	}
 
-	handleEncryption = (e) => {
-		e.preventDefault();
+	handleEncryption = (message, key) => {
 		let password = CryptoJS.PBKDF2(
-			this.props.message,
-			this.props.encryptionKey,
+			message,
+			key,
 			{keySize: 128 / 50}
 		).toString();
 		let search = password.search(/\d/);
@@ -43,41 +47,15 @@ class Home extends Component {
 		for (let i = nth - 1; i < password.length - 1; i += nth) {
 			password[i] = password[i].toUpperCase();
 		}
-		// this.props.dispatch(updatePassword(password.join("")));
-		this.copyPasswordToClipboard(password.join(""));
+		this.props.dispatch(updatePassword(password.join("")));
 	}
 
-	copyPasswordToClipboard = (password) => {
-		this.props.dispatch(copyPassword());
-		setTimeout(() => {
-			this.props.dispatch(copyPassword());
-		}, 1200)
-
-        let textArea = document.createElement("textarea");
-        textArea.style.position = 'fixed';
-        textArea.style.top = 0;
-        textArea.style.left = 0;
-        textArea.style.width = '2em';
-        textArea.style.height = '2em';
-        textArea.style.padding = 0;
-        textArea.style.border = 'none';
-        textArea.style.outline = 'none';
-        textArea.style.boxShadow = 'none';
-        textArea.style.background = 'transparent';
-        textArea.value = password;
-        document.body.appendChild(textArea);
-        textArea.select();
-
-        try {
-            document.execCommand('copy');
-        } catch (err) {
-            console.log('Oops, unable to copy');
-        }
-        document.body.removeChild(textArea);
-	}
-
-	revealPassword = () => {
-		this.props.dispatch(revealPassword());
+	showModal = (e) => {
+        e.preventDefault();
+        this.props.dispatch(copyPassword());
+        setTimeout(() => {
+            this.props.dispatch(copyPassword());
+        }, 1200)
 	}
 
 	render() {
@@ -90,7 +68,7 @@ class Home extends Component {
                 	{this.props.copyPassword ? <Modal/> : null}
 				</CSSTransitionGroup>
 				<Title/>
-				<Inputs handleChange={this.handleChange} handleEncryption={this.handleEncryption}/>
+				<Inputs showModal={this.showModal} handleChange={this.handleChange} password={this.props.password}/>
 			</div>
 		)
 	}

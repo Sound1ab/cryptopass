@@ -11,14 +11,10 @@ export default class Modal extends React.Component {
         return (
             <div className="modal">
                 <div className="modal__container modal--center">
-                    <div className="modal__icon">
-                        <div className="modal__circle modal--center">
+                        <div className="modal__circle modal">
                             <img src={tick} height="30px" width="30px"/>
                         </div>
-                    </div>
-                    <div className="modal__message">
-                        Password copied to clipboard!
-                    </div>
+                        <span className="modal__copy">Password copied to clipboard!</span>
                 </div>
             </div>
         )
